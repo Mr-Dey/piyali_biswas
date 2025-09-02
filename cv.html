@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piyali Biswas - Interactive CV</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="https://i.ibb.co/s9nYgLB3/Whats-App-Image-2025-09-02-at-11-03-39.jpg">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #1f2937;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            width: 1.25rem;
+            height: 1.25rem;
+            border-radius: 50%;
+            background-color: #f8fafc;
+            border: 4px solid #3b82f6;
+            left: -0.7rem;
+            top: 0;
+            z-index: 10;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 450px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 280px;
+            max-height: 350px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        /* Mobile-first alignment */
+        .section-content-wrapper {
+            text-align: center;
+        }
+        @media (min-width: 768px) {
+            .section-content-wrapper.md\:text-left {
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-30 shadow-sm">
+        <div class="container mx-auto px-4 sm:px-6 py-3">
+            <nav class="flex justify-between items-center">
+                <a href="#hero" class="text-xl font-bold text-blue-600">Piyali Biswas</a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#experience" class="text-gray-600 hover:text-blue-600 transition">Experience</a>
+                    <a href="#subjects" class="text-gray-600 hover:text-blue-600 transition">Subjects</a>
+                    <a href="#education" class="text-gray-600 hover:text-blue-600 transition">Education</a>
+                    <a href="#contact" class="text-gray-600 hover:text-blue-600 transition">Contact</a>
+                </div>
+                <button id="mobile-menu-button" class="md:hidden p-2 rounded-md text-gray-600 hover:text-blue-600 hover:bg-gray-100 focus:outline-none">
+                     <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+                </button>
+            </nav>
+            <div id="mobile-menu" class="hidden md:hidden mt-4">
+                <a href="#experience" class="mobile-menu-link block py-2 px-4 text-sm text-gray-600 hover:bg-blue-50 rounded-md">Experience</a>
+                <a href="#subjects" class="mobile-menu-link block py-2 px-4 text-sm text-gray-600 hover:bg-blue-50 rounded-md">Subjects</a>
+                <a href="#education" class="mobile-menu-link block py-2 px-4 text-sm text-gray-600 hover:bg-blue-50 rounded-md">Education</a>
+                <a href="#contact" class="mobile-menu-link block py-2 px-4 text-sm text-gray-600 hover:bg-blue-50 rounded-md">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 py-12">
+        <section id="hero" class="text-center pt-12 pb-16 md:pt-16 md:pb-24">
+            <img 
+                src="https://i.ibb.co/s9nYgLB3/Whats-App-Image-2025-09-02-at-11-03-39.jpg" 
+                alt="Profile picture of Piyali Biswas" 
+                class="w-40 h-40 mx-auto rounded-full ring-4 ring-white shadow-lg mb-6 object-cover"
+                onerror="this.onerror=null;this.src='https://placehold.co/128x128/e2e8f0/64748b?text=PB';"
+            >
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-800 mb-4">Piyali Biswas</h1>
+            <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+                "Dedicated Educator | M.A. in Education Candidate Versatile in Teaching | Committed to Inclusive Learning"
+            </p>
+        </section>
+
+        <section id="profile" class="my-12 md:my-16 p-6 sm:p-8 bg-white rounded-xl shadow-md">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-6">Profile</h2>
+            <div class="section-content-wrapper">
+                <p class="text-gray-600 text-lg leading-relaxed">
+                    Passionate educator currently pursuing an M.A. in Education from N.S.O.U Board, with a B.A. in
+                    Education (Hons) from W.B.S.U Board and a remarkable SGPA of 9.85% in my ongoing B.Ed program at
+                    Kingstone Teacher's Training College. My academic journey started with the W.B.B.S.E Board
+                    for Madhyamik, achieving 64%, followed by H.S. with the W.B.C.H.S.E Board, securing an
+                    impressive 74%. Alongside formal education, I've honed computer skills with a CITA
+                    certification. Born on 1st December 2000, I bring a youthful perspective and a fervor for
+                    education, consistently improving both pedagogical expertise and technological proficiency.
+                </p>
+            </div>
+        </section>
+
+        <section id="experience" class="py-12 md:py-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Career Experience</h2>
+            <div class="relative max-w-3xl mx-auto border-l-2 border-blue-200 pl-8 sm:pl-10 py-4 section-content-wrapper">
+                
+                <div class="timeline-item mb-12">
+                    <p class="text-sm font-semibold text-blue-600">January 2024 - Present</p>
+                    <h3 class="text-xl md:text-2xl font-bold text-gray-800 mt-1">Teacher</h3>
+                    <p class="text-md text-gray-500">Sewli Boy's High School</p>
+                </div>
+
+                <div class="timeline-item">
+                    <p class="text-sm font-semibold text-blue-600">January 2023 - March 2023</p>
+                    <h3 class="text-xl md:text-2xl font-bold text-gray-800 mt-1">Internship</h3>
+                    <p class="text-md text-gray-500">Rashbehari Institution for Girls</p>
+                </div>
+                
+            </div>
+        </section>
+
+        <section id="subjects" class="my-12 md:my-16 p-6 sm:p-8 bg-white rounded-xl shadow-md">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-6">Preferred Teaching Subjects</h2>
+            <div class="flex flex-wrap gap-3 justify-center">
+                <span class="bg-blue-100 text-blue-800 text-sm font-medium px-4 py-2 rounded-full">Bengali (I-X)</span>
+                <span class="bg-blue-100 text-blue-800 text-sm font-medium px-4 py-2 rounded-full">History (I-X)</span>
+                <span class="bg-blue-100 text-blue-800 text-sm font-medium px-4 py-2 rounded-full">Geography (I-X)</span>
+                <span class="bg-blue-100 text-blue-800 text-sm font-medium px-4 py-2 rounded-full">Social Studies</span>
+                <span class="bg-blue-100 text-blue-800 text-sm font-medium px-4 py-2 rounded-full">Education (XI & XII)</span>
+                <span class="bg-blue-100 text-blue-800 text-sm font-medium px-4 py-2 rounded-full">Political Science (XI & XII)</span>
+                <span class="bg-blue-100 text-blue-800 text-sm font-medium px-4 py-2 rounded-full">English</span>
+            </div>
+        </section>
+
+        <section id="education" class="py-12 md:py-16">
+             <div class="text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Education</h2>
+                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-center md:text-left max-w-3xl mx-auto">
+                    <div class="bg-gray-100 p-6 rounded-lg">
+                        <h3 class="text-xl font-bold text-blue-600">M.A. (Education)</h3>
+                        <p class="text-gray-600 mt-2">N.S.O.U Board</p>
+                        <p class="text-gray-500 text-sm mt-1">2022 - Present</p>
+                    </div>
+                    <div class="bg-gray-100 p-6 rounded-lg">
+                        <h3 class="text-xl font-bold text-blue-600">B.Ed</h3>
+                        <p class="text-gray-600 mt-2">Kingstone Teacher's Training College</p>
+                        <p class="text-gray-500 text-sm mt-1">2021-2023 (91%)</p>
+                    </div>
+                    <div class="bg-gray-100 p-6 rounded-lg">
+                        <h3 class="text-xl font-bold text-blue-600">B.A. (Education Hons)</h3>
+                        <p class="text-gray-600 mt-2">W.B.S.U Board</p>
+                        <p class="text-gray-500 text-sm mt-1">2021 (70%)</p>
+                    </div>
+                    <div class="bg-gray-100 p-6 rounded-lg">
+                        <h3 class="text-xl font-bold text-blue-600">H.S.</h3>
+                        <p class="text-gray-600 mt-2">W.B.C.H.S.E Board</p>
+                        <p class="text-gray-500 text-sm mt-1">2018 (74%)</p>
+                    </div>
+                    <div class="bg-gray-100 p-6 rounded-lg">
+                        <h3 class="text-xl font-bold text-blue-600">Madhyamik</h3>
+                        <p class="text-gray-600 mt-2">W.B.B.S.E Board</p>
+                        <p class="text-gray-500 text-sm mt-1">2016 (64%)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer id="contact" class="bg-gray-800 text-white">
+        <div class="container mx-auto px-6 py-12 text-center">
+            <h2 class="text-3xl font-bold mb-4">Get In Touch</h2>
+            <p class="mb-8">Feel free to contact me for educational opportunities.</p>
+            <div class="flex flex-col sm:flex-row justify-center items-center sm:space-x-6 space-y-4 sm:space-y-0">
+                 <div class="flex items-center space-x-3">
+                    <span class="text-blue-400">●</span>
+                    <span>+91 7439987596</span>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <span class="text-blue-400">●</span>
+                    <a href="mailto:pivalibiswastojo2000@gmail.com" class="hover:text-blue-400 transition">pivalibiswastojo2000@gmail.com</a>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <span class="text-blue-400">●</span>
+                    <span>English, Bengali & Hindi</span>
+                </div>
+            </div>
+            <div class="mt-8">
+                <a href="cv.pdf" download="Piyali_Biswas_CV.pdf" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full transition-colors duration-300">
+                    Download CV
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mobile menu logic
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
+
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
