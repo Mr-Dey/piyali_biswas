@@ -144,10 +144,10 @@
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-6">Preferred Teaching Subjects</h2>
             <div class="flex flex-wrap gap-3 justify-center">
                 <span class="bg-blue-100 text-blue-800 text-sm font-medium px-4 py-2 rounded-full">English</span>
+                <span class="bg-blue-100 text-blue-800 text-sm font-medium px-4 py-2 rounded-full">Social Studies</span>
                 <span class="bg-blue-100 text-blue-800 text-sm font-medium px-4 py-2 rounded-full">Bengali (I-X)</span>
                 <span class="bg-blue-100 text-blue-800 text-sm font-medium px-4 py-2 rounded-full">History (I-X)</span>
                 <span class="bg-blue-100 text-blue-800 text-sm font-medium px-4 py-2 rounded-full">Geography (I-X)</span>
-                <span class="bg-blue-100 text-blue-800 text-sm font-medium px-4 py-2 rounded-full">Social Studies</span>
                 <span class="bg-blue-100 text-blue-800 text-sm font-medium px-4 py-2 rounded-full">Education (XI & XII)</span>
                 <span class="bg-blue-100 text-blue-800 text-sm font-medium px-4 py-2 rounded-full">Political Science (XI & XII)</span>
             </div>
@@ -282,7 +282,7 @@
             // --- 2. DYNAMIC HTML GENERATION ---
             const pdfHTML = `
                 <style>
-                    #pdf-preview-content { font-family: Arial, sans-serif; color: #333; font-size: 11pt; line-height: 1.4; text-align: center; }
+                    #pdf-preview-content { font-family: Arial, sans-serif; color: #333; font-size: 11pt; line-height: 1.4; text-align: center; min-width: 750px; }
                     .container { width: 100%; max-width: 100%; }
                     .header { text-align: center; padding-bottom: 15px; border-bottom: 1px solid #ddd; margin-bottom: 25px; }
                     .header h1 { font-size: 26pt; margin: 0; font-weight: bold; }
@@ -367,11 +367,17 @@
             downloadBtn.disabled = true;
             downloadBtn.innerText = 'Downloading...';
 
+            // Force a specific width for consistent rendering across devices
+            element.style.width = '800px';
+
             html2canvas(element, {
                 scale: 2, // Higher scale for better quality
                 useCORS: true,
-                logging: false
+                logging: false,
+                width: 800 // Ensure canvas is created with this width
             }).then(canvas => {
+                element.style.width = ''; // Reset width for the on-screen preview
+
                 const imgData = canvas.toDataURL('image/jpeg', 1.0);
                 const margin = 20; // 20mm padding on all sides
 
@@ -411,6 +417,7 @@
                 downloadBtn.innerText = 'Download Now';
             }).catch(err => {
                 console.error("PDF Generation failed:", err);
+                element.style.width = ''; // Also reset width on error
                 // Reset and hide modal even on error
                 modal.classList.add('hidden');
                 pdfPreview.innerHTML = '';
