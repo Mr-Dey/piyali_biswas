@@ -9,6 +9,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <link rel="icon" type="image/x-icon" href="https://i.ibb.co/s9nYgLB3/Whats-App-Image-2025-09-02-at-11-03-39.jpg">
     <style>
         body {
@@ -98,13 +101,16 @@
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-6">Profile</h2>
             <div class="section-content-wrapper">
                 <p class="text-gray-600 text-lg leading-relaxed">
-                    Passionate educator currently pursuing an M.A. in Education from N.S.O.U Board, with a B.A. in
-                    Education (Hons) from W.B.S.U Board and a remarkable SGPA of 9.85% in my ongoing B.Ed program at
-                    Kingstone Teacher's Training College. My academic journey started with the W.B.B.S.E Board
-                    for Madhyamik, achieving 64%, followed by H.S. with the W.B.C.H.S.E Board, securing an
-                    impressive 74%. Alongside formal education, I've honed computer skills with a CITA
-                    certification. Born on 1st December 2000, I bring a youthful perspective and a fervor for
-                    education, consistently improving both pedagogical expertise and technological proficiency.
+                    I have completed my M.A. in Education from Netaji Subhas Open University, along with a B.A. in Education (Hons) from
+                    West Bengal State University and a B.Ed from Kingstone Teacher’s Training College with an outstanding SGPA of
+                    9.85.<br><br>
+                    
+                    My academic journey began with Madhyamik under the West Bengal Board of Secondary Education (64%), followed by Higher
+                    Secondary under the West Bengal Council of Higher Secondary Education (74%). I have also enhanced my skills with a CDTA
+                    computer certification.<br><br>
+                    
+                    I am committed to continuously improving my teaching skills and pedagogical knowledge to
+                    contribute effectively to the field of education.
                 </p>
             </div>
         </section>
@@ -119,6 +125,12 @@
                     <p class="text-md text-gray-500">Sewli Boy's High School</p>
                 </div>
 
+                <div class="timeline-item mb-12">
+                    <p class="text-sm font-semibold text-blue-600">January 2025 - April 2025</p>
+                    <h3 class="text-xl md:text-2xl font-bold text-gray-800 mt-1">Teacher</h3>
+                    <p class="text-md text-gray-500">Kids Anna Public School CBSE</p>
+                </div>
+
                 <div class="timeline-item">
                     <p class="text-sm font-semibold text-blue-600">January 2023 - March 2023</p>
                     <h3 class="text-xl md:text-2xl font-bold text-gray-800 mt-1">Internship</h3>
@@ -131,17 +143,17 @@
         <section id="subjects" class="my-12 md:my-16 p-6 sm:p-8 bg-white rounded-xl shadow-md">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-6">Preferred Teaching Subjects</h2>
             <div class="flex flex-wrap gap-3 justify-center">
+                <span class="bg-blue-100 text-blue-800 text-sm font-medium px-4 py-2 rounded-full">English</span>
                 <span class="bg-blue-100 text-blue-800 text-sm font-medium px-4 py-2 rounded-full">Bengali (I-X)</span>
                 <span class="bg-blue-100 text-blue-800 text-sm font-medium px-4 py-2 rounded-full">History (I-X)</span>
                 <span class="bg-blue-100 text-blue-800 text-sm font-medium px-4 py-2 rounded-full">Geography (I-X)</span>
                 <span class="bg-blue-100 text-blue-800 text-sm font-medium px-4 py-2 rounded-full">Social Studies</span>
                 <span class="bg-blue-100 text-blue-800 text-sm font-medium px-4 py-2 rounded-full">Education (XI & XII)</span>
                 <span class="bg-blue-100 text-blue-800 text-sm font-medium px-4 py-2 rounded-full">Political Science (XI & XII)</span>
-                <span class="bg-blue-100 text-blue-800 text-sm font-medium px-4 py-2 rounded-full">English</span>
             </div>
         </section>
 
-        <section id="subjects" class="my-12 md:my-16 p-6 sm:p-8 bg-white rounded-xl shadow-md">
+        <section id="languages" class="my-12 md:my-16 p-6 sm:p-8 bg-white rounded-xl shadow-md">
             <h3 class="text-3xl md:text-4xl font-bold text-center mb-6">Language Skills</h3>
             <div class="chart-container">
                 <canvas id="languageChart"></canvas>
@@ -155,7 +167,7 @@
                     <div class="bg-gray-100 p-6 rounded-lg">
                         <h3 class="text-xl font-bold text-blue-600">M.A. (Education)</h3>
                         <p class="text-gray-600 mt-2">N.S.O.U Board</p>
-                        <p class="text-gray-500 text-sm mt-1">2022 - Present</p>
+                        <p class="text-gray-500 text-sm mt-1">2022 - 2024 (64%)</p>
                     </div>
                     <div class="bg-gray-100 p-6 rounded-lg">
                         <h3 class="text-xl font-bold text-blue-600">B.Ed</h3>
@@ -168,7 +180,7 @@
                         <p class="text-gray-500 text-sm mt-1">2021 (70%)</p>
                     </div>
                     <div class="bg-gray-100 p-6 rounded-lg">
-                        <h3 class="text-xl font-bold text-blue-600">H.S.</h3>
+                        <h3 class="text-xl font-bold text-blue-600">Higher Secondary</h3>
                         <p class="text-gray-600 mt-2">W.B.C.H.S.E Board</p>
                         <p class="text-gray-500 text-sm mt-1">2018 (74%)</p>
                     </div>
@@ -183,6 +195,24 @@
 
     </main>
     
+    <!-- PDF Preview Modal -->
+    <div id="pdf-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white p-8 rounded-lg shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-auto">
+            <h2 class="text-2xl font-bold mb-4 text-center">CV Preview</h2>
+            <div id="pdf-preview" class="border p-4">
+                <!-- PDF content will be injected here -->
+            </div>
+            <div class="text-center mt-6">
+                <button id="download-now-btn" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-full transition-colors duration-300">
+                    Download Now
+                </button>
+                <button id="cancel-pdf-btn" class="ml-4 text-gray-600 hover:text-gray-800 font-bold py-3 px-6">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+
     <footer id="contact" class="bg-gray-800 text-white">
         <div class="container mx-auto px-6 py-12 text-center">
             <h2 class="text-3xl font-bold mb-4">Get In Touch</h2>
@@ -194,7 +224,7 @@
                 </div>
                 <div class="flex items-center space-x-3">
                     <span class="text-blue-400">●</span>
-                    <a href="mailto:pivalibiswastojo2000@gmail.com" class="hover:text-blue-400 transition">pivalibiswastojo2000@gmail.com</a>
+                    <a href="mailto:piyalibiswastojo2000@gmail.com" class="hover:text-blue-400 transition">piyalibiswastojo2000@gmail.com</a>
                 </div>
                 <div class="flex items-center space-x-3">
                     <span class="text-blue-400">●</span>
@@ -202,18 +232,202 @@
                 </div>
             </div>
             <div class="mt-8">
-                <a href="cv.pdf" download="Piyali_Biswas_CV.pdf" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full transition-colors duration-300">
-                    Download CV
-                </a>
+                <button id="prepare-cv-btn" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full transition-colors duration-300">
+                    Prepare CV for Download
+                </button>
             </div>
         </div>
     </footer>
 
     <script>
+        let languageChart; // Declare in a shared scope
+
+        const modal = document.getElementById('pdf-modal');
+        const prepareBtn = document.getElementById('prepare-cv-btn');
+        const downloadBtn = document.getElementById('download-now-btn');
+        const cancelBtn = document.getElementById('cancel-pdf-btn');
+        const pdfPreview = document.getElementById('pdf-preview');
+
+        prepareBtn.addEventListener('click', () => {
+            // --- 1. DATA EXTRACTION ---
+            const name = document.querySelector('#hero h1')?.innerText || '';
+            const title = document.querySelector('#hero p')?.innerText || '';
+            const profileImgSrc = document.querySelector('#hero img')?.src || '';
+            const profile = document.querySelector('#profile p')?.innerHTML || '';
+            
+            const experiences = Array.from(document.querySelectorAll('#experience .timeline-item')).map(item => ({
+                date: item.querySelector('p:first-child')?.innerText || '',
+                title: item.querySelector('h3')?.innerText || '',
+                place: item.querySelector('p:last-child')?.innerText || ''
+            }));
+
+            const subjects = Array.from(document.querySelectorAll('#subjects span')).map(s => s.innerText);
+
+            const getProficiency = (label) => {
+                if(label === 'Bengali') return "Native";
+                if(label === 'Hindi') return "Advanced";
+                if(label === 'English') return "Upper Intermediate";
+                return "";
+            }
+            const languages = languageChart.data.labels.map(label => `${label}: ${getProficiency(label)}`);
+
+            const educations = Array.from(document.querySelectorAll('#education .grid > div')).map(item => ({
+                degree: item.querySelector('h3')?.innerText || '',
+                school: item.querySelector('p:nth-of-type(1)')?.innerText || '',
+                date: item.querySelector('p:nth-of-type(2)')?.innerText || ''
+            }));
+
+            const contactItems = Array.from(document.querySelectorAll('#contact .flex-col > div')).map(item => item.innerText.replace('●', '').trim());
+
+            // --- 2. DYNAMIC HTML GENERATION ---
+            const pdfHTML = `
+                <style>
+                    #pdf-preview-content { font-family: Arial, sans-serif; color: #333; font-size: 11pt; line-height: 1.4; text-align: center; }
+                    .container { width: 100%; max-width: 100%; }
+                    .header { text-align: center; padding-bottom: 15px; border-bottom: 1px solid #ddd; margin-bottom: 25px; }
+                    .header h1 { font-size: 26pt; margin: 0; font-weight: bold; }
+                    .header p { font-size: 12pt; margin: 5px 0 0; color: #555; }
+                    .main { display: table; width: 100%; table-layout: fixed; }
+                    .left-col, .right-col { display: table-cell; vertical-align: top; box-sizing: border-box; text-align: left; }
+                    .left-col { width: 35%; padding-right: 25px; }
+                    .right-col { width: 65%; padding-left: 25px; border-left: 1px solid #eee; }
+                    h2 { font-size: 14pt; color: #3b82f6; border-bottom: 1px solid #eee; padding-bottom: 8px; margin-top: 0; margin-bottom: 15px; font-weight: bold;}
+                    .section { margin-bottom: 25px; page-break-inside: avoid; }
+                    .section p, .section li { margin: 0 0 5px 0; }
+                    ul { list-style-type: none; padding-left: 10px; }
+                    .job, .edu-item { margin-bottom: 20px; }
+                    .job p, .edu-item p { margin: 0; }
+                    .job .title, .edu-item .degree { font-weight: bold; font-size: 12pt; color: #000;}
+                    .job .date, .edu-item .date { color: #666; font-size: 9pt; margin-top: 3px;}
+                    .profile-photo { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; margin: 0 auto 25px auto; display: block; }
+                    .contact-item { margin-bottom: 8px; }
+                </style>
+                <div id="pdf-preview-content">
+                    <div class="container">
+                        <div class="header">
+                            <h1>${name}</h1>
+                            <p>${title}</p>
+                        </div>
+                        <div class="main">
+                            <div class="left-col">
+                                <img src="${profileImgSrc}" class="profile-photo" alt="Profile Photo">
+                                <div class="section">
+                                    <h2>CONTACT</h2>
+                                    ${contactItems.map(item => `<p class="contact-item">${item}</p>`).join('')}
+                                </div>
+                                <div class="section">
+                                    <h2>PROFILE</h2>
+                                    <p>${profile}</p>
+                                </div>
+                                <div class="section">
+                                    <h2>LANGUAGE SKILLS</h2>
+                                    ${languages.map(lang => `<p>${lang}</p>`).join('')}
+                                </div>
+                            </div>
+                            <div class="right-col">
+                                <div class="section">
+                                    <h2>CAREER EXPERIENCE</h2>
+                                    ${experiences.map(exp => `
+                                        <div class="job">
+                                            <p class="title">${exp.title} - ${exp.place}</p>
+                                            <p class="date">${exp.date}</p>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                                <div class="section">
+                                    <h2>EDUCATION</h2>
+                                    ${educations.map(edu => `
+                                        <div class="edu-item">
+                                            <p class="degree">${edu.degree} - ${edu.school}</p>
+                                            <p class="date">${edu.date}</p>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                                 <div class="section">
+                                    <h2>PREFERRED SUBJECTS</h2>
+                                    <ul>
+                                       ${subjects.map(sub => `<li>- ${sub}</li>`).join('')}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // --- 3. INJECT & SHOW PREVIEW ---
+            pdfPreview.innerHTML = pdfHTML;
+            modal.classList.remove('hidden');
+        });
+
+        downloadBtn.addEventListener('click', () => {
+            const element = document.getElementById('pdf-preview-content');
+            if (!element) return;
+
+            downloadBtn.disabled = true;
+            downloadBtn.innerText = 'Downloading...';
+
+            html2canvas(element, {
+                scale: 2, // Higher scale for better quality
+                useCORS: true,
+                logging: false
+            }).then(canvas => {
+                const imgData = canvas.toDataURL('image/jpeg', 1.0);
+                const margin = 20; // 20mm padding on all sides
+
+                // A4 page dimensions in mm
+                const pdfWidth = 210;
+                const pdfHeight = 297;
+                
+                // Usable area width and height
+                const usableWidth = pdfWidth - (margin * 2);
+                const usableHeight = pdfHeight - (margin * 2);
+
+                const canvasWidth = canvas.width;
+                const canvasHeight = canvas.height;
+                const canvasAspectRatio = canvasWidth / canvasHeight;
+                
+                let imgWidth = usableWidth;
+                let imgHeight = imgWidth / canvasAspectRatio;
+
+                if (imgHeight > usableHeight) {
+                    imgHeight = usableHeight;
+                    imgWidth = usableHeight * canvasAspectRatio;
+                }
+                
+                const pdf = new jspdf.jsPDF({
+                    unit: 'mm',
+                    format: 'a4',
+                    orientation: 'portrait'
+                });
+
+                pdf.addImage(imgData, 'JPEG', margin, margin, imgWidth, imgHeight);
+                pdf.save('Piyali_Biswas_CV.pdf');
+
+                // Reset and hide modal
+                modal.classList.add('hidden');
+                pdfPreview.innerHTML = '';
+                downloadBtn.disabled = false;
+                downloadBtn.innerText = 'Download Now';
+            }).catch(err => {
+                console.error("PDF Generation failed:", err);
+                // Reset and hide modal even on error
+                modal.classList.add('hidden');
+                pdfPreview.innerHTML = '';
+                downloadBtn.disabled = false;
+                downloadBtn.innerText = 'Download Now';
+            });
+        });
+
+        cancelBtn.addEventListener('click', () => {
+            modal.classList.add('hidden');
+            pdfPreview.innerHTML = '';
+        });
+
         document.addEventListener('DOMContentLoaded', () => {
             // Mobile menu logic
             const ctx = document.getElementById('languageChart').getContext('2d');
-            const languageChart = new Chart(ctx, {
+            languageChart = new Chart(ctx, {
                 type: 'radar',
                 data: {
                     labels: ['Bengali', 'Hindi', 'English'],
