@@ -199,7 +199,7 @@
     <div id="pdf-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
         <div class="bg-white p-8 rounded-lg shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-auto">
             <h2 class="text-2xl font-bold mb-4 text-center">CV Preview</h2>
-            <div id="pdf-preview" class="border p-4">
+            <div id="pdf-preview" class="border p-2">
                 <!-- PDF content will be injected here -->
             </div>
             <div class="text-center mt-6">
@@ -248,6 +248,16 @@
         const cancelBtn = document.getElementById('cancel-pdf-btn');
         const pdfPreview = document.getElementById('pdf-preview');
 
+        function resetPreviewStyles() {
+            const previewContent = document.getElementById('pdf-preview-content');
+            if (previewContent) {
+                previewContent.style.transform = '';
+                previewContent.style.transformOrigin = '';
+            }
+            pdfPreview.style.height = '';
+            pdfPreview.innerHTML = '';
+        }
+
         prepareBtn.addEventListener('click', () => {
             // --- 1. DATA EXTRACTION ---
             const name = document.querySelector('#hero h1')?.innerText || '';
@@ -282,12 +292,12 @@
             // --- 2. DYNAMIC HTML GENERATION ---
             const pdfHTML = `
                 <style>
-                    #pdf-preview-content { font-family: Arial, sans-serif; color: #333; font-size: 11pt; line-height: 1.4; text-align: center; min-width: 750px; }
+                    #pdf-preview-content { font-family: Arial, sans-serif; color: #333; font-size: 11pt; line-height: 1.4; text-align: left; }
                     .container { width: 100%; max-width: 100%; }
                     .header { text-align: center; padding-bottom: 15px; border-bottom: 1px solid #ddd; margin-bottom: 25px; }
                     .header h1 { font-size: 26pt; margin: 0; font-weight: bold; }
                     .header p { font-size: 12pt; margin: 5px 0 0; color: #555; }
-                    .main { display: table; width: 100%; table-layout: fixed; }
+                    .main { display: table; width: 100%; table-layout: auto; }
                     .left-col, .right-col { display: table-cell; vertical-align: top; box-sizing: border-box; text-align: left; }
                     .left-col { width: 45%; padding-right: 25px; }
                     .right-col { width: 55%; padding-left: 25px; border-left: 1px solid #eee; }
@@ -302,53 +312,20 @@
                     .profile-photo { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; margin: 0 auto 25px auto; display: block; }
                     .contact-item { margin-bottom: 8px; }
                 </style>
-                <div id="pdf-preview-content">
+                <div id="pdf-preview-content" style="width: 800px;">
                     <div class="container">
-                        <div class="header">
-                            <h1>${name}</h1>
-                            <p>${title}</p>
-                        </div>
+                        <div class="header"><h1>${name}</h1><p>${title}</p></div>
                         <div class="main">
                             <div class="left-col">
                                 <img src="${profileImgSrc}" class="profile-photo" alt="Profile Photo">
-                                <div class="section">
-                                    <h2>CONTACT</h2>
-                                    ${contactItems.map(item => `<p class="contact-item">${item}</p>`).join('')}
-                                </div>
-                                <div class="section">
-                                    <h2>PROFILE</h2>
-                                    <p>${profile}</p>
-                                </div>
-                                <div class="section">
-                                    <h2>LANGUAGE SKILLS</h2>
-                                    ${languages.map(lang => `<p>${lang}</p>`).join('')}
-                                </div>
+                                <div class="section"><h2>CONTACT</h2>${contactItems.map(item => `<p class="contact-item">${item}</p>`).join('')}</div>
+                                <div class="section"><h2>PROFILE</h2><p>${profile}</p></div>
+                                <div class="section"><h2>LANGUAGE SKILLS</h2>${languages.map(lang => `<p>${lang}</p>`).join('')}</div>
                             </div>
                             <div class="right-col">
-                                <div class="section">
-                                    <h2>CAREER EXPERIENCE</h2>
-                                    ${experiences.map(exp => `
-                                        <div class="job">
-                                            <p class="title">${exp.title} - ${exp.place}</p>
-                                            <p class="date">${exp.date}</p>
-                                        </div>
-                                    `).join('')}
-                                </div>
-                                <div class="section">
-                                    <h2>EDUCATION</h2>
-                                    ${educations.map(edu => `
-                                        <div class="edu-item">
-                                            <p class="degree">${edu.degree} - ${edu.school}</p>
-                                            <p class="date">${edu.date}</p>
-                                        </div>
-                                    `).join('')}
-                                </div>
-                                 <div class="section">
-                                    <h2>PREFERRED SUBJECTS</h2>
-                                    <ul>
-                                       ${subjects.map(sub => `<li>- ${sub}</li>`).join('')}
-                                    </ul>
-                                </div>
+                                <div class="section"><h2>CAREER EXPERIENCE</h2>${experiences.map(exp => `<div class="job"><p class="title">${exp.title} - ${exp.place}</p><p class="date">${exp.date}</p></div>`).join('')}</div>
+                                <div class="section"><h2>EDUCATION</h2>${educations.map(edu => `<div class="edu-item"><p class="degree">${edu.degree} - ${edu.school}</p><p class="date">${edu.date}</p></div>`).join('')}</div>
+                                <div class="section"><h2>PREFERRED SUBJECTS</h2><ul>${subjects.map(sub => `<li>- ${sub}</li>`).join('')}</ul></div>
                             </div>
                         </div>
                     </div>
@@ -356,8 +333,23 @@
             `;
             
             // --- 3. INJECT & SHOW PREVIEW ---
+            resetPreviewStyles();
             pdfPreview.innerHTML = pdfHTML;
             modal.classList.remove('hidden');
+
+            // --- 4. SCALE PREVIEW FOR SMALL SCREENS ---
+            const previewContent = document.getElementById('pdf-preview-content');
+            const containerWidth = pdfPreview.clientWidth;
+            const contentWidth = previewContent.offsetWidth;
+
+            if (contentWidth > containerWidth) {
+                const scale = containerWidth / contentWidth;
+                previewContent.style.transform = `scale(${scale})`;
+                previewContent.style.transformOrigin = 'top left';
+                
+                const scaledHeight = previewContent.offsetHeight * scale;
+                pdfPreview.style.height = `${scaledHeight}px`;
+            }
         });
 
         downloadBtn.addEventListener('click', () => {
@@ -367,31 +359,22 @@
             downloadBtn.disabled = true;
             downloadBtn.innerText = 'Downloading...';
 
-            // Force a specific width for consistent rendering across devices
-            element.style.width = '800px';
-
+            const originalTransform = element.style.transform;
+            element.style.transform = '';
+            
             html2canvas(element, {
-                scale: 2, // Higher scale for better quality
+                scale: 2,
                 useCORS: true,
                 logging: false,
-                width: 800 // Ensure canvas is created with this width
+                width: element.offsetWidth
             }).then(canvas => {
-                element.style.width = ''; // Reset width for the on-screen preview
-
                 const imgData = canvas.toDataURL('image/jpeg', 1.0);
-                const margin = 10; // 10mm padding on all sides
-
-                // A4 page dimensions in mm
+                const margin = 10;
                 const pdfWidth = 210;
                 const pdfHeight = 297;
-                
-                // Usable area width and height
                 const usableWidth = pdfWidth - (margin * 2);
                 const usableHeight = pdfHeight - (margin * 2);
-
-                const canvasWidth = canvas.width;
-                const canvasHeight = canvas.height;
-                const canvasAspectRatio = canvasWidth / canvasHeight;
+                const canvasAspectRatio = canvas.width / canvas.height;
                 
                 let imgWidth = usableWidth;
                 let imgHeight = imgWidth / canvasAspectRatio;
@@ -401,26 +384,15 @@
                     imgWidth = usableHeight * canvasAspectRatio;
                 }
                 
-                const pdf = new jspdf.jsPDF({
-                    unit: 'mm',
-                    format: 'a4',
-                    orientation: 'portrait'
-                });
-
+                const pdf = new jspdf.jsPDF({ unit: 'mm', format: 'a4', orientation: 'portrait' });
                 pdf.addImage(imgData, 'JPEG', margin, margin, imgWidth, imgHeight);
                 pdf.save('Piyali_Biswas_CV.pdf');
-
-                // Reset and hide modal
-                modal.classList.add('hidden');
-                pdfPreview.innerHTML = '';
-                downloadBtn.disabled = false;
-                downloadBtn.innerText = 'Download Now';
             }).catch(err => {
                 console.error("PDF Generation failed:", err);
-                element.style.width = ''; // Also reset width on error
-                // Reset and hide modal even on error
+            }).finally(() => {
+                element.style.transform = originalTransform;
                 modal.classList.add('hidden');
-                pdfPreview.innerHTML = '';
+                resetPreviewStyles();
                 downloadBtn.disabled = false;
                 downloadBtn.innerText = 'Download Now';
             });
@@ -428,11 +400,10 @@
 
         cancelBtn.addEventListener('click', () => {
             modal.classList.add('hidden');
-            pdfPreview.innerHTML = '';
+            resetPreviewStyles();
         });
 
         document.addEventListener('DOMContentLoaded', () => {
-            // Mobile menu logic
             const ctx = document.getElementById('languageChart').getContext('2d');
             languageChart = new Chart(ctx, {
                 type: 'radar',
@@ -452,52 +423,10 @@
                 },
                 options: {
                     maintainAspectRatio: false,
-                    scales: {
-                        r: {
-                            angleLines: {
-                                color: 'rgba(0, 0, 0, 0.1)'
-                            },
-                            grid: {
-                                color: 'rgba(0, 0, 0, 0.1)'
-                            },
-                            pointLabels: {
-                                font: {
-                                    size: 14,
-                                    family: "'Inter', sans-serif"
-                                },
-                                color: '#1f2937'
-                            },
-                            ticks: {
-                                beginAtZero: true,
-                                max: 5,
-                                stepSize: 1,
-                                backdropColor: 'rgba(255, 255, 255, 0)',
-                                color: '#6b7280',
-                                font: {
-                                  size: 10
-                                }
-                            }
-                        }
-                    },
+                    scales: { r: { angleLines: { color: 'rgba(0, 0, 0, 0.1)' }, grid: { color: 'rgba(0, 0, 0, 0.1)' }, pointLabels: { font: { size: 14, family: "'Inter', sans-serif" }, color: '#1f2937' }, ticks: { beginAtZero: true, max: 5, stepSize: 1, backdropColor: 'rgba(255, 255, 255, 0)', color: '#6b7280', font: { size: 10 } } } },
                     plugins: {
-                        legend: {
-                            display: false
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    let label = context.dataset.label || '';
-                                    if (label) {
-                                        label += ': ';
-                                    }
-                                    let proficiency = '';
-                                    if(context.label === 'Bengali') proficiency = "Native";
-                                    if(context.label === 'Hindi') proficiency = "Advanced";
-                                    if(context.label === 'English') proficiency = "Upper Intermediate";
-                                    return `${context.label}: ${proficiency}`;
-                                }
-                            }
-                        }
+                        legend: { display: false },
+                        tooltip: { callbacks: { label: function(context) { let label = context.dataset.label || ''; if (label) { label += ': '; } let proficiency = ''; if(context.label === 'Bengali') proficiency = "Native"; if(context.label === 'Hindi') proficiency = "Advanced"; if(context.label === 'English') proficiency = "Upper Intermediate"; return `${context.label}: ${proficiency}`; } } }
                     }
                 }
             });
@@ -505,15 +434,8 @@
             const mobileMenu = document.getElementById('mobile-menu');
             const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
 
-            mobileMenuButton.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
-
-            mobileMenuLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileMenu.classList.add('hidden');
-                });
-            });
+            mobileMenuButton.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
+            mobileMenuLinks.forEach(link => { link.addEventListener('click', () => { mobileMenu.classList.add('hidden'); }); });
         });
     </script>
 </body>
